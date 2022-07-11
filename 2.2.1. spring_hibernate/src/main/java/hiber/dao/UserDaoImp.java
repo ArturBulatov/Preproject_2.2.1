@@ -16,28 +16,16 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
-   @Autowired
    private SessionFactory sessionFactory;
+
+   @Autowired
+   public UserDaoImp(SessionFactory sessionFactory) {
+      this.sessionFactory = sessionFactory;
+   }
 
    @Override
    public void add(User user) {
       sessionFactory.getCurrentSession().save(user);
-   }
-
-   public User getById(Long id) {
-      User user = sessionFactory.getCurrentSession().get(User.class, id);
-      return user;
-   }
-
-   public User getByCar(String model, int series) {
-      Query query = sessionFactory.getCurrentSession().createQuery("from Car where model=:mod and series =: ser");
-      query.setParameter("mod", model);
-      query.setParameter("ser", series);
-      Car car = (Car) query.getSingleResult();
-      Query query2 = sessionFactory.getCurrentSession().createQuery("from User where car=:ca");
-      query2.setParameter("ca", car);
-      User user = (User) query2.getSingleResult();
-      return user;
    }
 
    @Override

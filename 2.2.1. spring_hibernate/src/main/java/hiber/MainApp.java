@@ -33,7 +33,6 @@ public class MainApp {
       }
 
 
-//      System.out.println(userService.getById(1L));
       System.out.println(userService.getByCar("Audi", 4));
 
       context.close();
